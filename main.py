@@ -1,3 +1,4 @@
+from os import name
 from pathlib import Path
 def readfileandfolder():
     path = Path()
@@ -19,6 +20,38 @@ def createfile():
             print(f"File '{filename}' already exists.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+def readfile():
+    try:    
+        readfileandfolder()
+        filename = input("Please Enter your File Name to Read: ")
+        p = Path(filename)
+        if p.exists() and p.is_file():
+            with open(p,'r') as fs:
+                data = fs.read()
+                print(data)
+            print("Readed Successfully")
+        else:
+            print(f"File '{filename}' does not exist.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+def updatefile():
+    try:
+        readfileandfolder()
+        filename = input("Please Enter your File Name to Update: ")
+        p = Path(filename)
+        if p.exists() and p.is_file():
+            with open(p,'a') as fs:
+                data = input("What you want to append in this file: ")
+                fs.write(data)
+            print("Updated Successfully")
+        else:
+            print(f"File '{filename}' does not exist.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
     
 print("Press 1 for Creating a file")
 print("Press 2 for Reading a file")
@@ -29,3 +62,10 @@ check = int(input("PLease Enter your Chouce: "))
 
 if check == 1:
     createfile()
+    
+if check == 2:
+    readfile()
+
+if check == 3:
+    updatefile()
+    
